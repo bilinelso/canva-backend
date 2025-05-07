@@ -10,9 +10,13 @@ def gerar():
     dados = request.get_json()
     if not dados:
         return jsonify({'erro': 'Dados ausentes'}), 400
-
-    try:
-        url_imagem = gerar_imagem(dados)
+try:
+        url_imagem = gerar_imagem(
+            dados.get('mes', ''),
+            dados.get('semana', ''),
+            dados.get('percentual', ''),
+            dados.get('liquido', '')
+        )
         return jsonify({'image_url': url_imagem})
     except Exception as e:
         import traceback
