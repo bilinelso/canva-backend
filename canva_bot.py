@@ -20,7 +20,7 @@ def gerar_imagem(mes, semana, percentual, liquido):
 
     # Inserção dos textos
     centralizar(mes.upper(), font_mes, 328, "white")
-    centralizar(f"DIA {semana}", font_semana, 372, "white")
+    centralizar(f"{semana}", font_semana, 372, "white")
     centralizar(percentual, font_valor, 732, "#9FD958")
     centralizar(liquido, font_valor, 1064, "#9FD958")
 
