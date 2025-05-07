@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import uuid
 import os
 
-def gerar_imagem_local(mes, semana, percentual, liquido):
+def gerar_imagem(mes, semana, percentual, liquido):
     img = Image.open("template/Design sem nome (32).png").convert("RGB")
     draw = ImageDraw.Draw(img)
 
