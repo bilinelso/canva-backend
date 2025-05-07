@@ -1,27 +1,25 @@
-from flask import Flask, request, send_from_directory, jsonify
+from flask import Flask, request, jsonify
+from canva_bot import gerar_imagem
 from flask_cors import CORS
-from canva_bot import gerar_imagem_local
-import os
 
 app = Flask(__name__)
+
+# Libera CORS apenas para seu frontend no Netlify
 CORS(app, origins=["https://courageous-kataifi-c7a354.netlify.app"])
 
-@app.route("/api/gerar-imagem", methods=["POST"])
+@app.route('/api/gerar-imagem', methods=['POST'])
 def gerar():
-    dados = request.json
-    caminho = gerar_imagem_local(
-        dados.get("mes", ""),
-        dados.get("semana", ""),
-        dados.get("percentual", ""),
-        dados.get("liquido", "")
-    )
-    url_completa = f"https://{request.host}{caminho}"
-    return jsonify({ "url": url_completa })
+    dados = request.get_json()
+    if not dados:
+        return jsonify({'erro': 'Dados ausentes'}), 400
 
-@app.route("/static/<path:filename>")
-def static_files(filename):
-    return send_from_directory("static", filename)
+    try:
+        url_imagem = gerar_imagem(dados)
+        return jsonify({'image_url': url_imagem})
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({'erro': str(e)}), 500
 
-if __name__ == "__main__":
-    os.makedirs("static", exist_ok=True)
-    app.run(host="0.0.0.0", port=10000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=10000)
