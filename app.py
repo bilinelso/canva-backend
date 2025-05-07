@@ -3,9 +3,7 @@ from canva_bot import gerar_imagem
 from flask_cors import CORS
 
 app = Flask(__name__)
-
-# Libera CORS apenas para seu frontend no Netlify
-CORS(app, origins=["https://courageous-kataifi-c7a354.netlify.app"])
+CORS(app, origins="*")
 
 @app.route('/api/gerar-imagem', methods=['POST'])
 def gerar():
