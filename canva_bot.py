@@ -39,6 +39,6 @@ def gerar_imagem(mes, semana, percentual, liquido):
     caminho = os.path.join(output_folder, nome_arquivo)
     img.save(caminho)
 
-    BASE_URL = "https://canva-backend.onrender.com"
+    BASE_URL = "https://canva-backend-rsbl.onrender.com"
 return f"{BASE_URL}/static/{nome_arquivo}"
 
