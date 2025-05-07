@@ -4,7 +4,7 @@ from canva_bot import gerar_imagem_local
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://courageous-kataifi-c7a354.netlify.app"])
 
 @app.route("/api/gerar-imagem", methods=["POST"])
 def gerar():
