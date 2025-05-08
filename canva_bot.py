@@ -8,7 +8,7 @@ def gerar_imagem(mes, semana, percentual, liquido):
     largura_total = img.width
 
     # Carregar fontes com os tamanhos e pesos corretos
-    font_mes = ImageFont.truetype("fonts/OpenSans-Light.ttf", 28)
+    font_mes = ImageFont.truetype("fonts/OpenSans-Light.ttf", 32)
     font_semana = ImageFont.truetype("fonts/OpenSans-SemiBold.ttf", 38)
     font_valor = ImageFont.truetype("fonts/OpenSans-Bold.ttf", 51)
 
@@ -19,7 +19,7 @@ def gerar_imagem(mes, semana, percentual, liquido):
         draw.text((x, y), texto, font=fonte, fill=cor)
 
     # Inserção dos textos
-    centralizar(mes.upper(), font_mes, 328, "white")
+    centralizar(mes.upper(), font_mes, 335, "white")
     centralizar(f"{semana}", font_semana, 372, "white")
     centralizar(percentual, font_valor, 732, "#9FD958")
     centralizar(liquido, font_valor, 1064, "#9FD958")
