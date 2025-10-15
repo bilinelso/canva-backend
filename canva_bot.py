@@ -3,7 +3,7 @@ import uuid
 import os
 
 def gerar_imagem(mes, semana, percentual, liquido):
-    img = Image.open("template/Design sem nome (32).png").convert("RGBA")
+    img = Image.open("template/MAIO.png").convert("RGBA")
     
     # Criar uma camada para as sombras
     shadow_layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
