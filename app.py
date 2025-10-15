@@ -3,7 +3,22 @@ from canva_bot import gerar_imagem
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins="*")
+
+# Configuração CORS mais permissiva
+CORS(app, 
+     origins=["https://relatorio.stratefinance.com.br", "http://localhost:*"],
+     methods=["GET", "POST", "OPTIONS"],
+     allow_headers=["Content-Type"],
+     supports_credentials=True)
+
+# Rota adicional para preflight requests
+@app.route('/api/gerar-imagem', methods=['OPTIONS'])
+def options():
+    response = jsonify({'status': 'ok'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
+    return response
 
 @app.route('/api/gerar-imagem', methods=['POST'])
 def gerar():
@@ -17,13 +32,17 @@ def gerar():
             dados.get('semana', ''),
             dados.get('percentual', ''),
             dados.get('liquido', ''),
-            dados.get('layout', '1')  # Adiciona o parâmetro layout com valor padrão "1"
+            dados.get('layout', '1')
         )
-        return jsonify({'image_url': url_imagem})
+        response = jsonify({'image_url': url_imagem})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     except Exception as e:
         import traceback
         traceback.print_exc()
-        return jsonify({'erro': str(e)}), 500
+        error_response = jsonify({'erro': str(e)})
+        error_response.headers.add('Access-Control-Allow-Origin', '*')
+        return error_response, 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
