@@ -3,8 +3,16 @@ import uuid
 import os
 import math
 
-def gerar_imagem(mes, semana, percentual, liquido):
-    img = Image.open("template/MAIO.png").convert("RGB")
+def gerar_imagem(mes, semana, percentual, liquido, layout="1"):
+    # Seleciona o template baseado no layout escolhido
+    templates = {
+        "1": "template/MAIO.png",
+        "2": "template/Design sem nome (32).png"
+    }
+    
+    template_path = templates.get(layout, templates["1"])
+    
+    img = Image.open(template_path).convert("RGB")
     draw = ImageDraw.Draw(img)
     
     largura_total = img.width
