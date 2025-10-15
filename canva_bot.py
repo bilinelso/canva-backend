@@ -10,9 +10,9 @@ def gerar_imagem(mes, semana, percentual, liquido):
     largura_total = img.width
     
     # Carregar fontes com os tamanhos e pesos corretos
-    font_mes = ImageFont.truetype("fonts/OpenSans-Light.ttf", 32)
-    font_semana = ImageFont.truetype("fonts/OpenSans-SemiBold.ttf", 38)
-    font_valor = ImageFont.truetype("fonts/OpenSans-Bold.ttf", 51)
+    font_mes = ImageFont.truetype("fonts/GOTHAM-BOLD.TTF", 32)
+    font_semana = ImageFont.truetype("fonts/GOTHAM-LIGHT.TTF", 38)
+    font_valor = ImageFont.truetype("fonts/GOTHAM-BOLD.TTF", 51)
     
     # Configuração da sombra
     # Distância: 50, Direção: -45°, Transparência: 40%
