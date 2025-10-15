@@ -17,7 +17,7 @@ def gerar_imagem(mes, semana, percentual, liquido):
     # Configuração da sombra
     # Distância: 50, Direção: -45°, Transparência: 40%
     angulo = math.radians(-45)
-    distancia = 50
+    distancia = 7
     offset_x = int(distancia * math.cos(angulo))  # ~35
     offset_y = int(distancia * math.sin(angulo))  # ~-35
     
