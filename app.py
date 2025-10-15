@@ -16,7 +16,8 @@ def gerar():
             dados.get('mes', ''),
             dados.get('semana', ''),
             dados.get('percentual', ''),
-            dados.get('liquido', '')
+            dados.get('liquido', ''),
+            dados.get('layout', '1')  # Adiciona o parâmetro layout com valor padrão "1"
         )
         return jsonify({'image_url': url_imagem})
     except Exception as e:
