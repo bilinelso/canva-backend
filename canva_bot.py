@@ -4,7 +4,7 @@ import os
 import math
 
 def gerar_imagem(mes, semana, percentual, liquido):
-    img = Image.open("template/Design sem nome (32).png").convert("RGB")
+    img = Image.open("template/MAIO.png").convert("RGB")
     draw = ImageDraw.Draw(img)
     
     largura_total = img.width
