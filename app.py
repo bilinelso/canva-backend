@@ -27,12 +27,16 @@ def gerar():
         return jsonify({'erro': 'Dados ausentes'}), 400
 
     try:
+        # Determina o tipo de relatório (padrão: diario)
+        tipo_relatorio = dados.get('tipo_relatorio', 'diario')
+        
         url_imagem = gerar_imagem(
-            dados.get('mes', ''),
-            dados.get('semana', ''),
+            dados.get('mes', ''),  # Para acumulado, será "período"
+            dados.get('semana', ''),  # Ignorado no relatório acumulado
             dados.get('percentual', ''),
             dados.get('liquido', ''),
-            dados.get('layout', '1')
+            dados.get('layout', '1'),
+            tipo_relatorio=tipo_relatorio
         )
         response = jsonify({'image_url': url_imagem})
         response.headers.add('Access-Control-Allow-Origin', '*')
