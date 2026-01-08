@@ -3,7 +3,18 @@ import uuid
 import os
 import math
 
-def gerar_imagem(mes, semana, percentual, liquido, layout="1"):
+def gerar_imagem(mes, semana, percentual, liquido, layout="1", tipo_relatorio="diario"):
+    """
+    Gera imagem do relatório
+    
+    Args:
+        mes: Nome do mês (para diário) ou período (para acumulado)
+        semana: Número da semana (apenas para relatório diário)
+        percentual: Valor percentual
+        liquido: Valor líquido
+        layout: Template a ser usado ("1" ou "2")
+        tipo_relatorio: Tipo do relatório ("diario" ou "acumulado")
+    """
     # Seleciona o template baseado no layout escolhido
     templates = {
         "1": "template/MAIO.png",
@@ -27,12 +38,12 @@ def gerar_imagem(mes, semana, percentual, liquido, layout="1"):
     angulo = math.radians(45)
     distancia = 5
 
-    offset_x = int(distancia * math.cos(angulo))  # ~35
-    offset_y = int(distancia * math.sin(angulo))  # ~-35
+    offset_x = int(distancia * math.cos(angulo))
+    offset_y = int(distancia * math.sin(angulo))
     
     # Cor da sombra com 40% de opacidade (aproximado em RGB)
     # Misturando preto com a cor de fundo azul do template
-    cor_sombra = (26, 40, 68)  # Tom escuro que simula sombra sobre azul
+    cor_sombra = (26, 40, 68)
     
     # Função auxiliar para centralizar e desenhar texto com sombra
     def centralizar_com_sombra(texto, fonte, y, cor):
@@ -45,11 +56,19 @@ def gerar_imagem(mes, semana, percentual, liquido, layout="1"):
         # Desenhar texto principal por cima
         draw.text((x, y), texto, font=fonte, fill=cor)
     
-    # Inserção dos textos com as cores especificadas
-    centralizar_com_sombra(mes.upper(), font_mes, 335, "white")  # Mês: #white
-    centralizar_com_sombra(f"{semana}", font_semana, 372, "white")  # Semana: #white
-    centralizar_com_sombra(percentual, font_valor, 732, "#0291cf")  # Percentual: #0291cf
-    centralizar_com_sombra(liquido, font_valor, 1064, "#7ed957")  # Líquido: #7ed957
+    # Lógica diferente para relatório diário vs acumulado
+    if tipo_relatorio == "acumulado":
+        # Relatório Acumulado
+        centralizar_com_sombra(mes.upper(), font_mes, 335, "white")  # Período
+        # Não mostra semana no relatório acumulado
+    else:
+        # Relatório Diário (padrão)
+        centralizar_com_sombra(mes.upper(), font_mes, 335, "white")  # Mês
+        centralizar_com_sombra(f"{semana}", font_semana, 372, "white")  # Semana
+    
+    # Valores sempre são mostrados
+    centralizar_com_sombra(percentual, font_valor, 732, "#0291cf")  # Percentual
+    centralizar_com_sombra(liquido, font_valor, 1064, "#7ed957")  # Líquido
     
     # Salvar imagem com nome único
     nome_arquivo = f"{uuid.uuid4()}.png"
